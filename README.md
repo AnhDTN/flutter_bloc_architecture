@@ -1,12 +1,15 @@
 <div style="text-align: justify">
 
-![forthebadge](https://github.com/AnhDTN/api/blob/master/image/English%20Lesson.pdf)
+![forthebadge](https://raw.githubusercontent.com/AnhDTN/api/master/image/flutter_lession.png)
 
 
 ## Develop language
 
 Dart
 
+##Architechture 
+
+[Flutter_Bloc](https://bloclibrary.dev/)
 
 ## Description
 
@@ -24,3 +27,4 @@ Doan Tien Nam Anh - [GitHub](https://github.com/AnhDTN)
 
 
 </div>
+!
