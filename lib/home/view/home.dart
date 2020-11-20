@@ -13,14 +13,16 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  AuthBloc _authBloc;
 
   @override
   void initState() {
-    _authBloc = BlocProvider.of<AuthBloc>(context);
     super.initState();
   }
 
+  @override
+  void dispose() {
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,7 +32,11 @@ class _HomeState extends State<Home> {
           children: [
             Center(
               child: Container(
-                  child: Text("Xin chao ${_authBloc.state.user.phone}"),
+                  child: Builder(builder: (context) {
+                    final phone = context.select(
+                            (AuthBloc bloc) => bloc.state.user.phone);
+                        return Text("Xin chao $phone");
+                  }),
 
               ),
             ),

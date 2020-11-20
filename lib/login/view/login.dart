@@ -1,12 +1,10 @@
 import 'package:demo_login/access/colors.dart';
 import 'package:demo_login/access/images.dart';
-import 'package:demo_login/auth/bloc/auth_bloc.dart';
 import 'package:demo_login/login/bloc/login_bloc.dart';
 import 'package:demo_login/login/bloc/login_event.dart';
 import 'package:demo_login/login/bloc/login_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:user_repository/user_repository.dart';
 
 class LoginPage extends StatefulWidget {
   static Route route() {
@@ -158,6 +156,166 @@ class _LoginPageState extends State<LoginPage>
         });
   }
 
+  Widget loginForm() {
+    return Container(
+      child: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.only(left: 28, right: 28),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(top: 128),
+                    child: Text(
+                      "Welcome Back",
+                      style: Theme.of(context).textTheme.headline2,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 8),
+                    child: Text(
+                      "Please log in to your account",
+                      style: Theme.of(context).textTheme.bodyText1,
+                    ),
+                  ),
+                  inputForm(),
+                  loginButton(),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 16),
+                    child: Text(
+                      "Forgot Password?",
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyText2
+                          .copyWith(color: AppColors.blue100Color),
+                    ),
+                  ),
+                  Center(
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 16),
+                      child: Text(
+                        "Don't have account?",
+                        style: Theme.of(context).textTheme.bodyText2,
+                      ),
+                    ),
+                  ),
+                  Center(
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 4),
+                      child: Text("Register new?",
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyText2
+                              .copyWith(color: AppColors.blue100Color)),
+                    ),
+                  ),
+                ],
+              ),
+              Column(
+                children: [
+                  Center(
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 70),
+                      child: Text("Or log in with",
+                          style: Theme.of(context).textTheme.bodyText1),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 16),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.only(right: 8),
+                            child: GestureDetector(
+                              child: Container(
+                                height: 48,
+                                alignment: Alignment.center,
+                                color: Colors.white,
+                                child: Row(
+                                  crossAxisAlignment:
+                                  CrossAxisAlignment.center,
+                                  mainAxisAlignment:
+                                  MainAxisAlignment.center,
+                                  children: [
+                                    Center(
+                                        child: Image.asset(
+                                          ImageName.facebook,
+                                          width: 16,
+                                          height: 16,
+                                        )),
+                                    Padding(
+                                      padding:
+                                      const EdgeInsets.only(left: 8),
+                                      child: Text(
+                                        "Facebook",
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .button
+                                            .copyWith(
+                                            color:
+                                            AppColors.blue100Color),
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 8),
+                            child: GestureDetector(
+                              child: Container(
+                                height: 48,
+                                color: Colors.white,
+                                child: Row(
+                                  crossAxisAlignment:
+                                  CrossAxisAlignment.center,
+                                  mainAxisAlignment:
+                                  MainAxisAlignment.center,
+                                  children: [
+                                    Center(
+                                        child: Image.asset(
+                                          ImageName.google,
+                                          width: 16,
+                                          height: 16,
+                                        )),
+                                    Padding(
+                                      padding:
+                                      const EdgeInsets.only(left: 8),
+                                      child: Text(
+                                        "Google",
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .button
+                                            .copyWith(
+                                            color:
+                                            AppColors.red100Color),
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return
@@ -208,161 +366,7 @@ class _LoginPageState extends State<LoginPage>
               Scaffold.of(context).showSnackBar(snackBar);
             } else if (state.status == LoginStatus.done) {}
           },
-          child: SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.only(left: 28, right: 28),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Column(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(top: 128),
-                        child: Text(
-                          "Welcome Back",
-                          style: Theme.of(context).textTheme.headline2,
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 8),
-                        child: Text(
-                          "Please log in to your account",
-                          style: Theme.of(context).textTheme.bodyText1,
-                        ),
-                      ),
-                      inputForm(),
-                      loginButton(),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 16),
-                        child: Text(
-                          "Forgot Password?",
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodyText2
-                              .copyWith(color: AppColors.blue100Color),
-                        ),
-                      ),
-                      Center(
-                        child: Padding(
-                          padding: const EdgeInsets.only(top: 16),
-                          child: Text(
-                            "Don't have account?",
-                            style: Theme.of(context).textTheme.bodyText2,
-                          ),
-                        ),
-                      ),
-                      Center(
-                        child: Padding(
-                          padding: const EdgeInsets.only(top: 4),
-                          child: Text("Register new?",
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodyText2
-                                  .copyWith(color: AppColors.blue100Color)),
-                        ),
-                      ),
-                    ],
-                  ),
-                  Column(
-                    children: [
-                      Center(
-                        child: Padding(
-                          padding: const EdgeInsets.only(top: 70),
-                          child: Text("Or log in with",
-                              style: Theme.of(context).textTheme.bodyText1),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 16),
-                        child: Row(
-                          children: [
-                            Expanded(
-                              child: Padding(
-                                padding: const EdgeInsets.only(right: 8),
-                                child: GestureDetector(
-                                  child: Container(
-                                    height: 48,
-                                    alignment: Alignment.center,
-                                    color: Colors.white,
-                                    child: Row(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Center(
-                                            child: Image.asset(
-                                          ImageName.facebook,
-                                          width: 16,
-                                          height: 16,
-                                        )),
-                                        Padding(
-                                          padding:
-                                              const EdgeInsets.only(left: 8),
-                                          child: Text(
-                                            "Facebook",
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .button
-                                                .copyWith(
-                                                    color:
-                                                        AppColors.blue100Color),
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Expanded(
-                              child: Padding(
-                                padding: const EdgeInsets.only(left: 8),
-                                child: GestureDetector(
-                                  child: Container(
-                                    height: 48,
-                                    color: Colors.white,
-                                    child: Row(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Center(
-                                            child: Image.asset(
-                                          ImageName.google,
-                                          width: 16,
-                                          height: 16,
-                                        )),
-                                        Padding(
-                                          padding:
-                                              const EdgeInsets.only(left: 8),
-                                          child: Text(
-                                            "Google",
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .button
-                                                .copyWith(
-                                                    color:
-                                                        AppColors.red100Color),
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            )
-                          ],
-                        ),
-                      )
-                    ],
-                  ),
-                ],
-              ),
-            ),
-          ),
+          child: loginForm()
         ),
     );
   }

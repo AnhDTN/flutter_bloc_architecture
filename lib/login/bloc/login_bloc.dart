@@ -34,9 +34,9 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     final phone = event.phone;
     return state.copyWith(
       phone: phone,
-      status: validatePhone(phone) && validatePass(state.pass) 
+      status: _validatePhone(phone) && _validatePass(state.pass) 
           ? LoginStatus.validated 
-          : validatePhone(phone)  ? LoginStatus.passInvalidated : LoginStatus.phoneInvalidated,
+          : _validatePhone(phone)  ? LoginStatus.passInvalidated : LoginStatus.phoneInvalidated,
     );
   }
 
@@ -47,9 +47,9 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     final pass = event.pass;
     return state.copyWith(
       pass: pass,
-      status: validatePhone(state.phone) && validatePass(pass)
+      status: _validatePhone(state.phone) && _validatePass(pass)
           ? LoginStatus.validated
-          : validatePass(pass)  ? LoginStatus.phoneInvalidated : LoginStatus.passInvalidated,
+          : _validatePass(pass)  ? LoginStatus.phoneInvalidated : LoginStatus.passInvalidated,
     );
   }
 
@@ -73,7 +73,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     }
   }
 
-  bool validatePhone(String phone) {
+  bool _validatePhone(String phone) {
     if (phone.isNotEmpty && phone.length == 10) {
       return true;
     } else {
@@ -81,7 +81,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     }
   }
 
-  bool validatePass(String pass) {
+  bool _validatePass(String pass) {
     if (pass.isNotEmpty && pass.length >= 6) {
       return true;
     } else {
