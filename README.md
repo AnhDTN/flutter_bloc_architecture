@@ -5,7 +5,11 @@
 
 ## Develop language
 
-Dart
+[Dart](https://dart.dev/guides)
+
+## Flutter documents
+
+[Flutter](https://flutter.dev/docs)
 
 ## Architechture 
 
@@ -14,12 +18,6 @@ Dart
 ## Description
 
 Project flutter write with Bloc architecture
-
-
-## Document by google
-
-[Dart](https://dart.dev/guides) - [Flutter](https://flutter.dev/docs)
-
 
 ## Author
 
