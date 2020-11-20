@@ -7,7 +7,7 @@
 
 Dart
 
-##Architechture 
+## Architechture 
 
 [Flutter_Bloc](https://bloclibrary.dev/)
 
